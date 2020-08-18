@@ -18,7 +18,7 @@ function wait_for_process () {
 }
 
 INFO "Starting supervisor"
-/usr/bin/supervisord -n >> /dev/null 2>&1 &
+sudo /usr/bin/supervisord -u root -n >> /dev/null 2>&1 &
 
 INFO "Waiting for processes to be running"
 processes=(dockerd)
@@ -28,7 +28,7 @@ for process in "${processes[@]}"; do
     if [ $? -ne 0 ]; then
         ERROR "$process is not running after max time"
         exit 1
-    else 
+    else
         INFO "$process is running"
     fi
 done
