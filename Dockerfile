@@ -1,6 +1,7 @@
 FROM ubuntu:18.04
 
 RUN apt update \
+    && apt dist-upgrade -y \
     && apt install -y ca-certificates openssh-client \
     wget curl iptables supervisor sudo \
     && rm -rf /var/lib/apt/list/*
