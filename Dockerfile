@@ -7,8 +7,8 @@ RUN apt update \
     && rm -rf /var/lib/apt/list/*
 
 ENV DOCKER_CHANNEL=stable \
-    DOCKER_VERSION=19.03.12 \
-    DOCKER_COMPOSE_VERSION=1.26.2 \
+    DOCKER_VERSION=19.03.13 \
+    DOCKER_COMPOSE_VERSION=1.27.4 \
     DEBUG=false
 
 RUN useradd -ms /bin/bash ubuntu && \

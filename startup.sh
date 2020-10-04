@@ -17,6 +17,10 @@ function wait_for_process () {
     return 0
 }
 
+INFO "Enabling experimental features on docker"
+sudo mkdir -p /etc/docker/
+echo '{"experimental": true, "features": { "buildkit": true }}' | sudo tee -a /etc/docker/daemon.json
+
 INFO "Starting supervisor"
 sudo /usr/bin/supervisord -u root -n >> /dev/null 2>&1 &
 
