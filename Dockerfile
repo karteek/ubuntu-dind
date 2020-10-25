@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 
 RUN apt update \
     && apt dist-upgrade -y \
-    && apt install -y ca-certificates openssh-client \
+    && apt install -y ca-certificates openssh-client qemu-user-static binfmt-support jq \
     wget curl iptables supervisor sudo \
     && rm -rf /var/lib/apt/list/*
 
@@ -59,6 +59,9 @@ RUN curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOS
 
 USER ubuntu
 WORKDIR /home/ubuntu
+
+RUN mkdir -p /home/ubuntu/.docker/cli-plugins && curl -L "https://github.com/docker/buildx/releases/download/v0.4.2/buildx-v0.4.2.linux-amd64" -o /home/ubuntu/.docker/cli-plugins/docker-buildx \
+    && chmod +x /home/ubuntu/.docker/cli-plugins/docker-buildx
 
 ENTRYPOINT ["/usr/local/bin/startup.sh"]
 
