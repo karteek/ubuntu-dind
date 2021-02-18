@@ -7,8 +7,9 @@ RUN apt update \
     && rm -rf /var/lib/apt/list/*
 
 ENV DOCKER_CHANNEL=stable \
-    DOCKER_VERSION=19.03.13 \
-    DOCKER_COMPOSE_VERSION=1.27.4 \
+    DOCKER_VERSION=19.03.15 \
+    DOCKER_COMPOSE_VERSION=1.28.4 \
+    DOCKER_BUILDX_VERSION=0.5.1 \
     DEBUG=false
 
 RUN useradd -ms /bin/bash ubuntu && \
@@ -60,7 +61,7 @@ RUN curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOS
 USER ubuntu
 WORKDIR /home/ubuntu
 
-RUN mkdir -p /home/ubuntu/.docker/cli-plugins && curl -L "https://github.com/docker/buildx/releases/download/v0.4.2/buildx-v0.4.2.linux-amd64" -o /home/ubuntu/.docker/cli-plugins/docker-buildx \
+RUN mkdir -p /home/ubuntu/.docker/cli-plugins && curl -L "https://github.com/docker/buildx/releases/download/v${DOCKER_BUILDX_VERSION}/buildx-v${DOCKER_BUILDX_VERSION}.linux-amd64" -o /home/ubuntu/.docker/cli-plugins/docker-buildx \
     && chmod +x /home/ubuntu/.docker/cli-plugins/docker-buildx
 
 ENTRYPOINT ["/usr/local/bin/startup.sh"]
